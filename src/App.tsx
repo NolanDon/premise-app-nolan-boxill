@@ -91,7 +91,7 @@ useEffect(() => {
               ref={inputRef}
               className="searchTerm" 
               placeholder="Search by artist, or title, eg: 'Van Gogh'" />
-            <button type="submit" className="searchButton" onClick={handleSearchClick}>
+            <button data-testid="submit" type="submit" className="searchButton" onClick={handleSearchClick}>
               <i className="fa fa-search"></i>search
             </button>
           </div>
