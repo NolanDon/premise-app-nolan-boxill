@@ -1,5 +1,7 @@
 # Project requires Node 16.10.0
 
+- App is deployed at https://finalstroke.herokuapp.com/
+
 - I used `nvm -use 16.10.0` to specify version
 
 after cloning, run:
