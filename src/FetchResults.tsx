@@ -77,9 +77,9 @@ export const FetchResults = (prop: {id: string}) => {
                 </tr>
                 <tr>
                     <td>{ awaitResponse(<img src={image} alt="artists painting" className="img"/>)}</td>
-                    <td>{ awaitResponse(title)}</td>
-                    <td>{ awaitResponse(yearCreated)}</td>
-                    <td>{ awaitResponse(artistName)}</td>
+                    <td className="center">{ awaitResponse(title)}</td>
+                    <td className="center">{ awaitResponse(yearCreated)}</td>
+                    <td className="center">{ awaitResponse(artistName)}</td>
                 </tr>
             </thead>
       </table>
