@@ -62,6 +62,17 @@ body{
   color: #000000;
 }
 
+.searchTermDisabled {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #000000;
+}
+
 .searchTerm:focus{
   color: #000000;
 }
@@ -71,6 +82,18 @@ body{
   height: 36px;
   border: 1px solid #00B4CC;
   background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.searchButtonDisabled {
+  width: 80px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #4a4a4a;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;

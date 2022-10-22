@@ -36,8 +36,9 @@ export const FetchResults = (prop: {id: string}) => {
 
     useEffect(() => {
 
-        // GET
         const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${prop.id}`
+
+        if (prop.id === '') { return; }
 
         axiosCall(url).then((response: any) => {
             
@@ -51,7 +52,7 @@ export const FetchResults = (prop: {id: string}) => {
                 setTitle(response.data.title)
             }
         })
-    },[])
+    },)
     
     const awaitResponse = (value: JSX.Element | string | null) => {
         switch (status.activeStatus) {
