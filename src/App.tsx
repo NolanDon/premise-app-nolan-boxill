@@ -7,9 +7,11 @@ export const App = () => {
   const [readyToSearch, searchBtnEnabled] = useState<boolean>(true)
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [searchValue, setSearchValue] = useState("")
+  let [tables, assignNewTables] = useState<any[]>([])
   let [idList, addToIDList] = useState<IDList>([])
+  let [currentIndex, setNewIndex] = useState<Array<number>>([0,4])
 
-  interface IDList extends Array<string>{}
+  type IDList = Array<string>
 
   const debounceSearchButton = () => {
     searchBtnEnabled(false)
@@ -24,7 +26,7 @@ export const App = () => {
     }, 1000);
   }
 
-  const handleSearchClick= () => {
+  const handleSearchClick = () => {
     if (null !== inputRef.current) {
       debounceSearchButton();
       setSearchValue(inputRef.current.value);
@@ -66,6 +68,7 @@ export const App = () => {
 
     if (searchValue !== "") {
 
+      setNewIndex([0,4])
       addToIDList([])
 
       const RESULT_LIMIT = 1000;
@@ -93,16 +96,49 @@ export const App = () => {
 
   },[searchValue])
 
+  const getIdsOf = (): string[]  => {
 
-  const fetchResults = (): JSX.Element[] => {
+    let ids: string[] = []
+    let i = 0;
 
-    let list: JSX.Element[] = []
+    if (idList.length > 0) {
+      while(i <= currentIndex[1]) {
+          ids.push(idList[i])
+          i++
+      }
+    }
 
-    list = idList.map((id: string) => (
+    return ids;
+   }
+
+  const fetchResults = (): any[] => {
+
+    let firstResults: any[] = getIdsOf()
+    
+    if (firstResults.length > 0) {
+      tables = firstResults.map((id: string) => (
+        <FetchResults id={id} />
+      ))
+    }
+
+    return tables;
+  }
+
+  const handleShowMore = () => {
+
+    setNewIndex([currentIndex[0], currentIndex[1] + 10])
+
+    let results: any[] = getIdsOf()
+    let newIds: any[] = [];
+
+    newIds = results.map((id: string) => (
       <FetchResults id={id} />
     ))
-
-    return list;
+    
+    let verifyTables: any[] = [...tables, newIds]
+  
+    assignNewTables(verifyTables)
+    
   }
 
   return (
@@ -118,6 +154,13 @@ export const App = () => {
         </div>
       <div className="resultWrapper">
       {fetchResults()}
+      {idList.length > 0 ? 
+      <div className="center">
+        <button type="submit" className="center" onClick={handleShowMore} >
+          {'show more'}
+        </button>
+      </div>
+     : <></> }
       </div>
     </div>
   );
